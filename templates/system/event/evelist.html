@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concordia Conference System</title>
+</head>
+
+<style>
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.01)), url('https://www.concordia.ca/content/shared/en/news/stories/2020/07/15/concordia-is-once-again-named-best-university-in-north-america-under-50/jcr:content/top-image.img.full.medium.jpg/1594752232665.jpg') no-repeat 0% 20%/ cover;}
+    
+table,td,th {
+    border:1px solid black;}
+    
+td {
+    text-align:center;}
+    
+#conference_information {
+    border: 1px solid maroon;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 2%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 40px 50px;
+    border-radius: 10px;}
+    
+#href {
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid maroon;
+    border-radius: 10px;}
+    
+#href ul {
+    float:left;
+    margin: 0px;
+    padding: 0 0 0 0;
+    width: 920px;
+    list-style: none;}
+    
+#href ul li {
+    display: inline;}
+    
+#href ul li a{
+    float: left;
+    padding: 11px 20px; 
+    font-size: 28px;
+    text-align: center;
+    text-decoration: none;
+    color: maroon;    
+    font-family: Tahoma;
+    outline: none;}
+    
+#href li a:hover {
+    color:goldenrod;
+    background-color:white;
+    border-radius: 30px;}
+    
+.threed {
+    font-family: Comic Sans MS;
+    color: maroon;
+    text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135}
+    
+</style>
+<body>
+    <h1 style="font-size:45px" class="threed">Concordia Conference System</h1>
+
+    <div id="href">
+        <ul class="item">
+            <li><a href="{% url 'display_conference' %}" target="_blank">Conference</a></li>
+            <li><a href="{% url 'display_event' %}" target="_blank">Event</a></li>
+        </ul>
+    </div>
+
+    <div id="conference_information">
+        <h2 style="font-size:35px">Event Information</h2>
+        <p style="font-size:17px">Search by Event Room Name</p>
+        <div class="row">
+            <div class="col">
+                <div class="event search based on room name">
+                    <form method="get" action="/system/event">
+                    <input type="search" name="event_room" placeholder="Room Name" required style="width: 115px;">
+                    <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <p style="font-size:17px">Search by Event Initial Date</p>
+        <div class="row">
+            <div class="col">
+                <div class="event search based on event date">
+                    <form method="get" action="/system/event">
+                    <input type="date" name="event_initial_date" placeholder="Event Date e.g. 2022-07-25" required>
+                    <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <table width = "900" border = "1">
+            <tr>
+                <th style="font-size:20px">Event name</th>
+                <th style="font-size:20px">Event room</th>
+                <th style="font-size:20px">Initial date</th>
+                <th style="font-size:20px">End date</th>
+                <th style="font-size:20px">Initial time</th>
+                <th style="font-size:20px">End time</th>
+                <th style="font-size:20px">Speaker</th>
+            </tr>
+            {% for event in eventlist %}
+                <tr>
+                    <td style="font-size:20px">{{event.event_name}}</td>
+                    <td style="font-size:20px">{{event.event_room}}</td>
+                    <td style="font-size:20px">{{event.event_initial_date}}</td>
+                    <td style="font-size:20px">{{event.event_end_date}}</td>
+                    <td style="font-size:20px">{{event.event_initial_time}}</td>
+                    <td style="font-size:20px">{{event.event_end_time}}</td>
+                    <td style="font-size:20px">{{event.event_speaker}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
